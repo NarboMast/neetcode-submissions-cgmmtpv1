@@ -1,10 +1,13 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anagram_group = defaultdict(list)
+        groups = defaultdict(list)
 
-        for word in strs:
-            sorted_word = str(sorted(word))
-            anagram_group[sorted_word].append(word)
-            
+        for s in strs:
+            freq = [0] * 26
 
-        return list(anagram_group.values())
+            for c in s:
+                freq[ord(c) - ord('a')] += 1
+
+            groups[tuple(freq)].append(s)
+
+        return list(groups.values())
